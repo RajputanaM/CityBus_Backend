@@ -37,6 +37,8 @@ class Ticket(models.Model):
     destination_station = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    is_stamped = models.BooleanField(default=False)  # New field for stamping
+    stamp_date_time = models.DateTimeField(null=True, blank=True)  # New field for stamping date and time
 
     def __str__(self):
         return f"Ticket for {self.bus.bus_number} - {self.booking_date_time}"
