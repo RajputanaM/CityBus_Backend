@@ -258,3 +258,61 @@ def verify_otp_view2(request):
 
 
 
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from .serializers import ChatRoomSerializer, MemberSerializer, MessageSerializer
+
+class ChatRoomViewSet(viewsets.ModelViewSet):
+    queryset = ChatRoom.objects.all()
+    serializer_class = ChatRoomSerializer
+
+    @action(detail=True, methods=['post'])
+    def add_member(self, request, pk=None):
+        chat_room = self.get_object()
+        serializer = MemberSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(room=chat_room)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class MemberViewSet(viewsets.ModelViewSet):
+    queryset = Member.objects.all()
+    serializer_class = MemberSerializer
+
+class MessageViewSet(viewsets.ModelViewSet):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+    lookup_field = 'room'
+    @action(detail=True, methods=['post'])
+    def add_message(self, request, pk=None):
+        chat_room = self.get_object()
+        serializer = MessageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(room=chat_room, sender=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['get'])
+    def room_messages(self, request):
+        room_id = request.query_params.get('room_id')
+        if room_id is not None:
+            chat_room = get_object_or_404(ChatRoom, id=room_id)
+            messages = Message.objects.filter(room=chat_room)
+            serializer = MessageSerializer(messages, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({'error': 'room_id parameter is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class MessageViewSet1(viewsets.ModelViewSet):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+
+    @action(detail=False, methods=['get'])
+    def messages_by_room(self, request, room_id=None):
+        if room_id is not None:
+            messages = Message.objects.filter(room__id=room_id)
+            serializer = MessageSerializer(messages, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({'error': 'room_id parameter is required'}, status=status.HTTP_400_BAD_REQUEST)
