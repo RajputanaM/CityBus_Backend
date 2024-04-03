@@ -80,19 +80,10 @@ WSGI_APPLICATION = 'testapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'citybus',
-#         'USER': 'postgres',
-#         'PASSWORD': '5250',
-#         'HOST': 'localhost',
-#         'PORT': '1099',
-#     }
-# }
+
 
 DATABASES = {
-    'default': dj_database_url.parse('postgres://citybus1099:dRrZITai7Cu1kSYyz31vw3VtE8Zkn4Wb@dpg-cl96ac76e7vc73ae8vjg-a.oregon-postgres.render.com/citybus')
+    'default': dj_database_url.parse('postgres://example_citybus1081_user:sKtI1XEOBwly5araHlaas6pae979UitN@dpg-co6fh84f7o1s73dif4qg-a.oregon-postgres.render.com/example_citybus1081')
     }
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
