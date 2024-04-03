@@ -71,3 +71,16 @@ class Message(models.Model):
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
+
+class Conductor(models.Model):
+    name = models.CharField(max_length=255)
+    mobile = models.CharField(max_length=15, unique=True)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=255)
+    bus = models.ForeignKey(Bus, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+    
+
+
