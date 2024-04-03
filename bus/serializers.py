@@ -6,7 +6,10 @@ class BusStationSerializer(serializers.ModelSerializer):
         model = BusStation
         fields = '__all__'
     
-
+class Conductorserializer(serializers.ModelSerializer):
+    class Meta:
+        model = Conductor
+        fields = '__all__'
 
 class BusSerializer(serializers.ModelSerializer):
     class Meta:
@@ -35,8 +38,6 @@ class BusCountSerializer(serializers.Serializer):
     bus_count = serializers.IntegerField()
 
 
-
-
 class ChatRoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatRoom
@@ -50,4 +51,10 @@ class MemberSerializer(serializers.ModelSerializer):
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
+        fields = '__all__'
+
+
+class TicketSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
         fields = '__all__'
