@@ -18,6 +18,8 @@ urlpatterns = [
     path('bus-stations/', views.BusStationListCreateView.as_view(), name='bus-station-list-create'),
     path('bus-stations/<int:pk>/', views.BusStationDetailView.as_view(), name='bus-station-detail'),
     path('search/', views.search_buses.as_view()),
+
+    path('admin/', views.AdminListCreateView.as_view()),
     
     path('users/', views.UserListCreateView.as_view()),
     path('users/<str:email>/', views.UserProfileDetailView.as_view(), name='user-profile-detail'),
