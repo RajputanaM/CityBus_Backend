@@ -16,6 +16,11 @@ class BusSerializer(serializers.ModelSerializer):
         model = Bus
         fields = '__all__'
 
+class AdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdminProfile
+        fields = '__all__'
+
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
