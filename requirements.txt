@@ -12,5 +12,6 @@ frozenlist==1.4.0
 gunicorn==21.2.0
 psycopg2-binary==2.9.7
 tzdata==2023.3
+xlwt
 django-jazzmin
 
