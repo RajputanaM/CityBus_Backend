@@ -69,7 +69,11 @@ class BusSearchView(generics.ListAPIView):
 class BusStationListCreateView(generics.ListCreateAPIView):
     queryset = BusStation.objects.all()
     serializer_class = BusStationSerializer
-    
+
+class AdminListCreateView(generics.ListCreateAPIView):
+    queryset = AdminProfile.objects.all()
+    serializer_class = AdminSerializer
+
 class UserListCreateView(generics.ListCreateAPIView):
     queryset = Profile.objects.all()
     serializer_class = UserSerializer
