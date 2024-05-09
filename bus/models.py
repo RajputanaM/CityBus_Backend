@@ -16,6 +16,14 @@ class Bus(models.Model):
     def __str__(self):
         return f"{self.bus_number} - {self.source_station} to {self.destination_station}"
 
+class AdminProfile(models.Model):
+    name = models.CharField(max_length=255)
+    mobile = models.CharField(max_length=15, unique=True)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
 
 class Profile(models.Model):
     name = models.CharField(max_length=255)
